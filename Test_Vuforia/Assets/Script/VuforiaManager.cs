@@ -1,43 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Vuforia;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 [System.Serializable]
 public class HitTestResultEvent : UnityEvent<HitTestResult> { }
-public class EventTest : MonoBehaviour 
+public class VuforiaManager : MonoBehaviour 
 {
     public HitTestResultEvent clickEvent;
 
-    int a = 5;
-
     public Text t;
+
+    bool summoned = false;
 
     public void OnInteractiveHitTest(HitTestResult result)
     {
-        if(a > 0)
+        if(!summoned)
         {
-            a--;
+            summoned = true;
             clickEvent.Invoke(result);
-
         }
-
+    }
+	
+    bool hit = false;
+    public void Hit()
+    {
+        hit = true;
     }
 
-    public void Click()
+    private void LateUpdate()
     {
-        //clickEvent.Invoke();
-    }
+        t.text = hit.ToString();
 
-    public void QWE()
-    {
-        Debug.Log("qwe");
-    }
-
-    public void ASD()
-    {
-        t.text = "点击";
+        hit = false;
     }
 }
