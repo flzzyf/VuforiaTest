@@ -1,32 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour 
+public class GameManager : MonoBehaviour
 {
+    public Text t;
 
+    void Start()
+    {
 
-	void Start () 
-	{
-		
-	}
-	
-	void Update () 
-	{
-        RaycastHit hit;
-        Ray ray;
+    }
 
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log(" you clicked on " + hit.collider.gameObject.name);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            if (hit.collider.gameObject.name == "Your 3D Model Name")
+            if (Physics.Raycast(ray, out hit))
             {
-                // Write things you want to do when you click.
+                Debug.Log(" you clicked on " + hit.collider.gameObject.name);
+
+                if (hit.collider.gameObject.tag == "Item")
+                {
+                    t.text = "click";
+                    Destroy(hit.collider.gameObject);
+                    // Write things you want to do when you click.
+                }
             }
         }
 
-	}
+
+    }
 }
