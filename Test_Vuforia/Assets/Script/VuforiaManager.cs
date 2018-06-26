@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [System.Serializable]
 public class HitTestResultEvent : UnityEvent<HitTestResult> { }
-public class VuforiaManager : MonoBehaviour 
+public class VuforiaManager : MonoBehaviour
 {
     public HitTestResultEvent clickEvent;
 
@@ -15,13 +15,14 @@ public class VuforiaManager : MonoBehaviour
 
     public void OnInteractiveHitTest(HitTestResult result)
     {
-        if(!summoned)
-        {
-            summoned = true;
-            clickEvent.Invoke(result);
-        }
+        clickEvent.Invoke(result);
+        // if(!summoned)
+        // {
+        //     summoned = true;
+        //     clickEvent.Invoke(result);
+        // }
     }
-	
+
     bool hit = false;
     public void Hit()
     {
